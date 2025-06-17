@@ -1,9 +1,12 @@
 name: Deploy to Azure App Service
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
     branches:
-      - main  # Trigger the workflow on pushes to the main branch
+      - main
 
 jobs:
   deploy:
