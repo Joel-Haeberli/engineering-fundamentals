@@ -26,8 +26,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2.2.0
         with:
           args: >
-            -Dsonar.projectKey=playground
-            -Dsonar.organization=iptch-1
+            -Dsonar.projectKey=jhb-lren-sonar-test_jhb-lren-test-project
+            -Dsonar.organization=jhb-lren-sonar-test
             -Dsonar.sources=.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
