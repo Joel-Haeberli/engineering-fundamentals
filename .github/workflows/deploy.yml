@@ -1,0 +1,28 @@
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: jhblrengregistry.azurecr.io
+          username: ${{ secrets.AZURE_USERNAME }} # Azure service principal username
+          password: ${{ secrets.AZURE_PASSWORD }} # Azure service principal password
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: jhb-lreng-test-app # Name of your Azure App Service
+          images: 'jhblrengregistry.azurecr.io/ipt-spins:latest' # Image to deploy
+          publish-profile: ${{ secrets.AZURE_RESOURCEGROUP_CONTRIBUTOR_SERVICEPRINICIPAL }} # Publish profile secret
