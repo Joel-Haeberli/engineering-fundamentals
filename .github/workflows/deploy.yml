@@ -16,7 +16,9 @@ jobs:
       - name: Log in to Azure Container Registry
         uses: azure/docker-login@v1
         with:
-          creds: ${{ secrets.AZURE_RESOURCEGROUP_CONTRIBUTOR_SERVICEPRINICIPAL }}
+          login-server: jhblrengregistry.azurecr.io
+          username: ${{ secrets.AZURE_USERNAME }} # Azure service principal username
+          password: ${{ secrets.AZURE_PASSWORD }} # Azure service principal password
 
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
